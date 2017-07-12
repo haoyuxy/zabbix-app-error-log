@@ -1,0 +1,14 @@
+---
+- hosts: test
+  remote_user: yuhao
+  become: yes
+  become_method: sudo
+  tasks:
+    - name: "cp  nerr.sh"
+      copy: src=nerr.sh dest=/etc/zabbix/script/ mode=755 owner=zabbix group=zabbix
+    - name: "cp disclog.sh file"
+      copy: src=disclog.sh dest=/etc/zabbix/script/ mode=755 owner=zabbix group=zabbix
+    - name: "cp  elog.conf"
+      copy: src=elog.conf dest=/etc/zabbix/zabbix_agentd.d/ mode=644 owner=zabbix group=zabbix
+    - name: "restart zabbix-agent"
+      command: /etc/init.d/zabbix-agent restart
